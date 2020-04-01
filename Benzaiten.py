@@ -34,18 +34,18 @@ X_modified = X_modified / float(len(characters)) #makes this number a float that
 Y_modified = np_utils.to_categorical(Y)  #makes the array a one hot, an array with nine zeros and one one, to remove and relationship from the orignial enumerated label 
 
 model = Sequential() #creates a models using a sequntial layering from Keras, meaning the model can be buildt by a layering commands
-model.add(LSTM(500, input_shape=(X_modified.shape[1], X_modified.shape[2]), return_sequences=True)) # first number is how many set from the for loop above will be fed run through in one go,after that is creating the right shape of variables 
+model.add(LSTM(600, input_shape=(X_modified.shape[1], X_modified.shape[2]), return_sequences=True)) # first number is how many set from the for loop above will be fed run through in one go,after that is creating the right shape of variables 
 model.add(Dropout(0.2)) #used to remove data random data and reduce the chnace of the same data being procssed 
-model.add(LSTM(500)) # 
+model.add(LSTM(600)) # 
 model.add(Dropout(0.2))
 model.add(Dense(Y_modified.shape[1], activation='softmax'))
 model.compile(loss='categorical_crossentropy', optimizer='adam')
 
-model.fit(X_modified, Y_modified, epochs=5, batch_size=90)
+model.fit(X_modified, Y_modified, epochs=12, batch_size=90)
 
 model.save_weights('Benzaiten_700_0.2_700_0.2_100.h5')
 model.load_weights('Benzaiten_700_0.2_700_0.2_100.h5')
-string_mapped = X[99] #last row from X that is 99 characters long 
+string_mapped = X[1200] #last row from X that is 99 characters long 
 full_string = [n_to_char[value] for value in string_mapped]
 #-----generating characters------
 olist=[]
